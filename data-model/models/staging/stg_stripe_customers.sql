@@ -22,7 +22,7 @@ select
   coalesce(is_deleted, false) as is_deleted,
   currency as alpha_2_currency_code
 
-FROM read_parquet('s3://dev-landing-zone-0778194c/stripe/stripe_customers/DATE=*/*.parquet',
+FROM read_parquet('s3://{{ env_var('AWS_BUCKET_NAME') }}/stripe/stripe_customers/DATE=*/*.parquet',
                  hive_partitioning = true)
 
 {% if is_incremental() %}
