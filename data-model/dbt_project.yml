@@ -1,0 +1,28 @@
+
+name: 'rebrandly_poc'
+version: '1.0.0'
+
+profile: 'rebrandly_poc'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+
+models:
+  rebrandly_poc:
+    example:
+      +materialized: view
+
+seeds:
+  users:
+    +delimeter: ","
+    +quote: '"'  # If the delimiter is a semicolon
+    +quotechar: '"'   # If values are enclosed in double quotes

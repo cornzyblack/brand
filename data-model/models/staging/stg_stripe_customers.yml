@@ -1,0 +1,30 @@
+models:
+  - name: stg_stripe_customers
+    description: |
+      This model extracts and transforms customer data from the ingested Stripe data which was ingested in Airbyte
+    columns:
+      - name:
+          description: 'Customer name in uppercase.'
+      - address_city:
+          description: 'City from the customer address.'
+      - address_line:
+          description: Concatenated address lines 1 and 2.
+      - alpha_2_country_code:
+          description: ISO 2-letter country code.
+      - created_at:
+          description: Timestamp of customer creation.
+      - updated_at:
+          description: Timestamp of the last customer update.
+      - ingested_date:
+          description: Date when the data was ingested into the data warehouse.
+      - alpha_2_currency_code:
+          description: ISO 2-letter currency code.
+    tags:
+      - source: stripe
+      - layer: staging
+
+    tests:
+      - unique: id
+      - not_null:
+          - id
+          - name
