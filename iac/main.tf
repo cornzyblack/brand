@@ -36,8 +36,8 @@ resource "airbyte_source_stripe" "dev_stripe_source" {
     slice_range          = 30
     start_date           = "2017-01-25T00:00:00Z"
   }
-  name          = "dev-stripe-source"
-  workspace_id  = var.airbyte_workspace_id
+  name         = "dev-stripe-source"
+  workspace_id = var.airbyte_workspace_id
 }
 
 resource "aws_s3_bucket" "dev_landing_zone" {
@@ -64,7 +64,7 @@ resource "airbyte_destination_s3" "dev_stripe_landing_zone" {
     }
     s3_bucket_name   = aws_s3_bucket.dev_landing_zone.bucket
     s3_bucket_path   = "stripe/"
-    s3_path_format =   "$${STREAM_NAME}/DATE=$${YEAR}-$${MONTH}-$${DAY}/$${STREAM_NAME}_$${EPOCH}_"
+    s3_path_format   = "$${STREAM_NAME}/DATE=$${YEAR}-$${MONTH}-$${DAY}/$${STREAM_NAME}_$${EPOCH}_"
     s3_bucket_region = var.aws_region
   }
   name         = "dev-landing-zone-stripe"
@@ -80,7 +80,33 @@ resource "airbyte_connection" "stripe_s3_connection" {
   prefix                               = "stripe_"
   source_id                            = airbyte_source_stripe.dev_stripe_source.source_id
   status                               = "active"
+  configurations = {
+    streams = [{
+      sync_mode = "incremental_append"
+      name      = "products"
+      },
+      {
+        sync_mode = "incremental_append"
+        name      = "transactions"
+      },
+      {
+        sync_mode = "incremental_append"
+        name      = "customers"
+      },
+      {
+        sync_mode = "incremental_append"
+        name      = "invoices"
+      },
+      {
+        sync_mode = "incremental_append"
+        name      = "charges"
+    }]
+  }
   schedule = {
     schedule_type = "manual"
   }
+}
+
+output "s3_bucket_name" {
+  value = aws_s3_bucket.dev_landing_zone.id
 }
