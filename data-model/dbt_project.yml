@@ -1,8 +1,7 @@
+name: "rebrandly_poc"
+version: "1.0.0"
 
-name: 'rebrandly_poc'
-version: '1.0.0'
-
-profile: 'rebrandly_poc'
+profile: "rebrandly_poc"
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -15,7 +14,6 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
-
 models:
   rebrandly_poc:
     example:
@@ -24,5 +22,5 @@ models:
 seeds:
   users:
     +delimeter: ","
-    +quote: '"'  # If the delimiter is a semicolon
-    +quotechar: '"'   # If values are enclosed in double quotes
+    +quote: '"' # If the delimiter is a semicolon
+    +quotechar: '"' # If values are enclosed in double quotes
