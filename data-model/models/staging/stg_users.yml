@@ -1,25 +1,31 @@
 models:
   - name: stg_users
     description: |
-      This model represents a table from the master data: users
+      This model stages user data from the master data source.
     config:
       tags: ["master_data"]
     columns:
-      - name: user_id
-        description: The generated user_id for the User.
+      - name: id
+        description: Unique identifier for the user.
         tests:
-          - not_null:
-              config:
-                severity: error
+          - not_null
+          - unique
       - name: name
-        description: The name of the user
+        description: The user's full name.
         tests:
           - not_null:
               config:
                 severity: error
-      - name: last_updated
-        description: The last time the user updated the account.
-      - name: created_at
-        description: The time the user created the account at Rebrandly.
       - name: email
         description: The user's email address.
+        tests:
+          - not_null:
+              config:
+                severity: error
+          - unique
+      - name: created_at
+        description: Timestamp when the user created their Rebrandly account.
+      - name: updated_at
+        description: Timestamp of the last update to the user's account.
+      - name: load_date
+        description: Date when Airbyte loaded the data into the landing zone.
