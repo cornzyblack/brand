@@ -3,7 +3,7 @@ rebrandly_poc:
     dev:
       type: duckdb
       path: dev.duckdb
-      threads: 2
+      threads: 1
       extensions:
         - httpfs
         - parquet
