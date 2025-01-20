@@ -6,6 +6,8 @@ models:
       This model extracts and transforms Stripe subscription items data.
       It handles incremental loading and includes a ranking mechanism to select
       the latest record for each subscription item.
+    config:
+      tags: ["third_party", "stripe"]
 
     columns:
       - name: subscription_item_id

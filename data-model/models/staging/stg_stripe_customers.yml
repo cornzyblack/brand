@@ -5,7 +5,7 @@ models:
     config:
       tags: ["third_party", "stripe"]
     columns:
-      - name: id
+      - name: customer_id
         description: Unique identifier for the customer in Stripe.
         tests:
           - not_null
