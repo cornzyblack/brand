@@ -8,9 +8,9 @@
 with transformed_customers AS (
   select
     id,
-    name,
-    phone,
     TRY_CAST(json_extract(metadata, '$.user_id') AS int) AS user_id,
+    name,
+    phone AS phone_number,
     address['city'] AS address_city,
     TRIM(coalesce(address['line1'], '') || ' ' ||  coalesce(address['line2'], '')) AS address_line,
     address['state'] AS address_state,
@@ -33,13 +33,29 @@ FROM read_parquet('s3://{{ env_var('AWS_BUCKET_NAME') }}/stripe/stripe_customers
 ),
 
 ranked_customers AS (
-    SELECT *,
-           ROW_NUMBER() OVER (PARTITION BY id ORDER BY created_at DESC) AS row_num
-    FROM transformed_customers
-    LEFT JOIN {{ countries }} countries
-    ON transformed_customers.country_code = countries.code
+    SELECT tc.*,
+           ROW_NUMBER() OVER (PARTITION BY id ORDER BY updated_at DESC) AS row_num,
+           cc.name AS country_name
+    FROM transformed_customers tc
+    LEFT JOIN {{ ref('country_codes') }} cc
+    ON tc.country_code = cc.code
 )
 
-SELECT *
+SELECT
+id,
+user_id,
+name,
+phone_number,
+address_city,
+address_line,
+address_state,
+address_postal_code,
+country_code,
+created_at,
+updated_at,
+load_date,
+is_deleted,
+currency_code,
+country_name
 FROM ranked_customers
 WHERE row_num=1
