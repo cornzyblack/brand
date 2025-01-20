@@ -87,7 +87,7 @@ resource "airbyte_connection" "stripe_s3_connection" {
       },
       {
         sync_mode = "incremental_append"
-        name      = "transactions"
+        name      = "subscription_items"
       },
       {
         sync_mode = "incremental_append"
@@ -96,6 +96,10 @@ resource "airbyte_connection" "stripe_s3_connection" {
       {
         sync_mode = "incremental_append"
         name      = "invoices"
+      },
+      {
+        sync_mode = "incremental_append"
+        name      = "subscriptions"
       },
       {
         sync_mode = "incremental_append"
