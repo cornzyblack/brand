@@ -1,0 +1,47 @@
+version: 2
+
+seeds:
+  - name: country_codes
+    description: A mapping of two letter country codes to country names
+    columns:
+      - name: country_code
+        tests:
+          - unique
+          - not_null
+      - name: country_name
+        tests:
+          - unique
+          - not_null
+  - name: users
+    description: The registered users on Rebrandly
+    columns:
+      - name: user_id
+        description: The generated user_id for the User.
+        tests:
+          - not_null:
+              config:
+                severity: error
+      - name: name
+        description: The name of the user
+        tests:
+          - not_null:
+              config:
+                severity: error
+      - name: email
+        description: The email address of the user.
+        tests:
+          - not_null:
+              config:
+                severity: error
+      - name: created_at
+        description: The time the user created the account at Rebrandly.
+        tests:
+          - not_null:
+              config:
+                severity: error
+      - name: updated_at
+        description: The last time the user updated the account.
+        tests:
+          - not_null:
+              config:
+                severity: error
