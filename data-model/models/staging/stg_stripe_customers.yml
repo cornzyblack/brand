@@ -1,26 +1,46 @@
 models:
   - name: stg_stripe_customers
     description: |
-      This model extracts and transforms customer data from the ingested Stripe data which was ingested in Airbyte
+      This model stages customer data from Stripe, extracted from data ingested by Airbyte.
+    config:
+      tags: ["third_party", "stripe"]
     columns:
       - name: id
-        description: Customer name in uppercase.
+        description: Unique identifier for the customer in Stripe.
         tests:
           - not_null
+          - unique
+      - name: user_id
+        description: User ID associated with the customer (if applicable).
+        tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: name
+        description: The customer's name (individual or business).
+        tests:
+          - not_null:
+              config:
+                severity: error
+      - name: phone_number
+        description: The customer's phone number.
       - name: address_city
-        description: City from the customer's address.
+        description: City in the customer's address.
       - name: address_line
-        description: Concatenated address lines 1 and 2.
-      - name: alpha_2_country_code
-        description: ISO 2-letter country code.
+        description: Concatenation of address lines 1 and 2.
+      - name: address_postal_code
+        description: The customer's postal code.
+      - name: country_code
+        description: ISO 2-letter country code (e.g., US, GB).
       - name: created_at
-        description: Timestamp of customer creation.
+        description: Timestamp of customer creation in Stripe.
       - name: updated_at
-        description: Timestamp of the last customer update.
-      - name: ingested_date
-        description: Date when the data was ingested into the data warehouse.
-      - name: alpha_2_currency_code
-        description: ISO 2-letter currency code.
-    tags:
-      - source: stripe
-      - layer: staging
+        description: Timestamp of the last update to the customer record in Stripe.
+      - name: load_date
+        description: Date when Airbyte loaded the data into the landing zone.
+      - name: currency_code
+        description: ISO 3-letter currency code (e.g., USD, GBP).
+      - name: is_deleted
+        description: Indicates whether the customer record is marked as deleted in Stripe.
+      - name: country_name
+        description: The name of the country the customer is registered in.
