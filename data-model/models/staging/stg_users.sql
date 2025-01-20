@@ -12,10 +12,10 @@ WITH ranked_users AS (
 )
 
 SELECT
-user_id as id,
-name,
-email,
-created_at,
-last_updated as updated_at,
+    user_id as id,
+    name,
+    email,
+    created_at,
+    last_updated as updated_at
 FROM ranked_users
 WHERE rn = 1
