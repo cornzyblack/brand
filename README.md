@@ -48,7 +48,7 @@ You should see the following:
 
 You will need to copy the Credentials as they will be useful in the later steps.
 
-Fill in the following credentials in the `iac/dev.tfvars` file
+Fill in the following credentials in the [iac/dev.tfvars](iac/dev.tfvars) file
 
 ```
 aws_access_key_id =
@@ -67,9 +67,9 @@ stripe_api_key =
 
 This project assumes you have access to AWS and can generate an `AWS_ACCESS_KEY_ID`, and an `AWS_SECRET_ACCESS_KEY`. You can set up and create these keys by following the [﻿link here.](https://docs.aws.amazon.com/keyspaces/latest/devguide/create.keypair.html) Copy them and keep them somewhere safe, as you will need them in the following steps).
 
-For the `iac/dev.tfvars`fill in the `aws_access_key_id` and `aws_secret_access_key` you copied from the above.
+For the [iac/dev.tfvars](iac/dev.tfvars)fill in the `aws_access_key_id` and `aws_secret_access_key` you copied from the above.
 
-`iac/dev.tfvars`
+[iac/dev.tfvars](iac/dev.tfvars)
 
 ```
 aws_access_key_id = <value of AWS_ACCESS_KEY_ID>
@@ -84,13 +84,13 @@ stripe_account_id =
 stripe_api_key =
 ```
 
-There is a `test.env` file that contains the following, and they need to be filled out with the key and secret key you obtained from the IAM page
+There is a [test.env](test.env) file that contains the following, and they need to be filled out with the key and secret key you obtained from the IAM page
 
 **Kindly leave** the `AWS_BUCKET_NAME` blank for now, as it will be auto-generated for you after running provisioning the services with Terraform.
 
 ---
 
-`test.env`
+[test.env](test.env)
 
 ```
 AWS_ACCESS_KEY_ID=
@@ -99,7 +99,7 @@ AWS_REGION="eu-west-1"
 AWS_BUCKET_NAME=
 ```
 
-After filling in the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY `and your `AWS_REGION` in the `test.env` **rename it** to `.env` (Yes, still leave the `AWS_BUCKET_NAME` empty for now)
+After filling in the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY `and your `AWS_REGION` in the [test.env](test.env) **rename it** to `.env` (Yes, still leave the `AWS_BUCKET_NAME` empty for now)
 
 #### Setting up Stripe
 
@@ -111,13 +111,13 @@ You'd need a Stripe API key and a Stripe account ID for a test account. Kindly f
 
 ### Provisioning resources (Cloud + Airbyte)
 
-There is a file called `dev.tfvars` found in the `iac` directory.
+There is a file called [dev.tfvars](iac/dev.tfvars) found in the [iac/](iac/) directory.
 
-You will need to fill in the values in your `iac/dev.tfvars` as they will be required for provisioning the resources:
+You will need to fill in the values in your [iac/dev.tfvars](iac/dev.tfvars) as they will be required for provisioning the resources:
 
 Assuming you've been following the steps above, it should look like this:
 
-`iac/dev.tfvars`
+[iac/dev.tfvars](iac/dev.tfvars)
 
 ```
 aws_access_key_id = <value of AWS_ACCESS_KEY_ID>
@@ -159,10 +159,6 @@ If successful, in Airbyte, you should see the following:
 The next step is to trigger a sync manually by clicking on the connection and selecting `sync now`
 
 ![Screenshot 2025-01-20 at 20.45.06.png](https://eraser.imgix.net/workspaces/bNtMafAomhFRbV9RNm21/iNvzLUym61TQnmUEYWXk6qbQwBm2/vqmQjtbMoYbF6ldJqUNxs.png?ixlib=js-3.7.0 "Screenshot 2025-01-20 at 20.45.06.png")
-
-```
-
-```
 
 ### DBT
 
