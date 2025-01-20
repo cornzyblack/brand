@@ -46,11 +46,6 @@ variable "airbyte_client_secret" {
   description = "Your airbyte client secret"
 }
 
-variable "airtable_pat" {
-  type        = string
-  description = "Your airtable PAT"
-}
-
 variable "airbyte_workspace_id" {
   type        = string
   description = "Your airtable workspace ID"
