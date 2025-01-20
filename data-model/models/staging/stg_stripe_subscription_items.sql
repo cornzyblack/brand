@@ -9,7 +9,7 @@ WITH transformed_subscription_items AS (
     SELECT
         id as subscription_item_id,
         subscription as subscription_id,
-        COALESCE(status, FALSE) as subscription_status,
+        status AS subscription_status,
         to_timestamp(created) as created_at,
         to_timestamp(current_period_start) as current_period_start,
         to_timestamp(current_period_end::int) as current_period_end,

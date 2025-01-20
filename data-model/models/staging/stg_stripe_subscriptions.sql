@@ -28,7 +28,6 @@ WITH transformed_subscriptions AS (
 
     {% if is_incremental() %}
         WHERE created_at >= (SELECT COALESCE(MAX(created_at), '1900-01-01') FROM {{ this }})
-        OR updated_at >= (SELECT COALESCE(MAX(updated_at), '1900-01-01') FROM {{ this }})
     {% endif %}
 ),
 
