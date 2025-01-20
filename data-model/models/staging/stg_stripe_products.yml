@@ -1,0 +1,26 @@
+models:
+  - name: stg_stripe_products
+    description: |
+      This model stages product data from Stripe, extracted from data ingested by Airbyte.
+    config:
+      tags: ["third_party", "stripe"]
+    columns:
+      - name: id
+        description: Unique identifier for the product in Stripe.
+        tests:
+          - not_null
+          - unique
+      - name: active
+        description: Indicates whether the product is currently active and available for purchase.
+      - name: created_at
+        description: Timestamp when the product was created in Stripe.
+      - name: default_price
+        description: The product's default price
+      - name: name
+        description: The name of the product as displayed in Stripe.
+      - name: description
+        description: A detailed description of the product.
+      - name: is_deleted
+        description: If the product has been deleted or not.
+      - name: load_date
+        description: Date when Airbyte loaded the data into the landing zone.
