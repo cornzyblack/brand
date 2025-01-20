@@ -41,14 +41,14 @@ models:
         description: Indicates whether the subscription will or did cancel at the end of the current billing period.
       - name: created_at
         description: Timestamp when the subscription was created in Stripe.
-      - name: default_payment_method_id
-        description: ID of the default payment method for this subscription (if applicable).
       - name: tax_percent
         description: Tax percentage applied to the subscription (if applicable).
       - name: trial_start
         description: Start date of the trial period (if applicable).
       - name: trial_end
         description: End date of the trial period (if applicable).
+      - name: currency
+        description: The currency of the subscription.
       - name: quantity
         description: Number of units of the subscription.
       - name: load_date

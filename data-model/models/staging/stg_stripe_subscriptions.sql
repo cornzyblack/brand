@@ -51,8 +51,9 @@ SELECT
     created_at,
     tax_percent,
     trial_start,
-    currency,
     trial_end,
+    currency,
     quantity,
+    load_date
 FROM ranked_subscriptions
 WHERE row_num = 1

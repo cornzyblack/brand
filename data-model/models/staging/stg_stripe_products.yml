@@ -10,17 +10,17 @@ models:
         tests:
           - not_null
           - unique
-      - name: active
-        description: Indicates whether the product is currently active and available for purchase.
-      - name: created_at
-        description: Timestamp when the product was created in Stripe.
-      - name: default_price
-        description: The product's default price
       - name: name
         description: The name of the product as displayed in Stripe.
+      - name: active
+        description: Indicates whether the product is currently active and available for purchase.
       - name: description
         description: A detailed description of the product.
       - name: is_deleted
         description: If the product has been deleted or not.
+      - name: default_price
+        description: The product's default price
+      - name: created_at
+        description: Timestamp when the product was created in Stripe.
       - name: load_date
         description: Date when Airbyte loaded the data into the landing zone.
