@@ -42,5 +42,3 @@ models:
         description: ISO 3-letter currency code (e.g., USD, GBP).
       - name: is_deleted
         description: Indicates whether the customer record is marked as deleted in Stripe.
-      - name: country_name
-        description: The name of the country the customer is registered in.
