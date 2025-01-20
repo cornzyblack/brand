@@ -11,6 +11,11 @@ WITH ranked_users AS (
     FROM {{ ref('users') }}
 )
 
-SELECT *
+SELECT
+user_id as id,
+name,
+email,
+created_at,
+last_updated,
 FROM ranked_users
 WHERE rn = 1

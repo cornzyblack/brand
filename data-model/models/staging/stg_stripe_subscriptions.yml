@@ -1,0 +1,19 @@
+models:
+  - name: stg_stripe_subsctiptions
+    description: |
+      This model extracts and transforms customer data from the ingested Stripe data which was ingested in Airbyte
+    config:
+      tags: ["airbyte", "third_party", "stripe"]
+    columns:
+      - name: id
+        description: Customer name in uppercase.
+        tests:
+          - not_null
+      - name: user_id
+        description: The user_id of the customer
+        tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: address_city
+        description: City from the customer's address.
