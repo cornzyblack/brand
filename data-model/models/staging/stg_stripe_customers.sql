@@ -5,28 +5,41 @@
     )
 }}
 
-
-select
-  id,
-  UPPER(name) AS name,
-  phone,
-  address['user_id'] as user_id,
-  address['city'] as address_city,
-  trim(address['line1'] || ' ' ||  address['line2']) as address_line,
-  address['state'] as address_state,
-  address['postal_code'] as address_postal_code,
-  address['country'] AS alpha_2_country_code,
-  created as created_at,
-  updated as updated_at,
-  DATE AS ingested_date,
-  coalesce(is_deleted, false) as is_deleted,
-  currency as alpha_2_currency_code
-
+with transformed_customers AS (
+  select
+    id,
+    name,
+    phone,
+    TRY_CAST(json_extract(metadata, '$.user_id') AS int) AS user_id,
+    address['city'] AS address_city,
+    TRIM(coalesce(address['line1'], '') || ' ' ||  coalesce(address['line2'], '')) AS address_line,
+    address['state'] AS address_state,
+    address['postal_code'] AS address_postal_code,
+    address['country'] AS country_code,
+    to_timestamp(created) AS created_at,
+    to_timestamp(updated) AS updated_at,
+    DATE AS load_date,
+    coalesce(is_deleted, false) AS is_deleted,
+    currency AS currency_code
 FROM read_parquet('s3://{{ env_var('AWS_BUCKET_NAME') }}/stripe/stripe_customers/DATE=*/*.parquet',
                  hive_partitioning = true)
 
 {% if is_incremental() %}
 
-where load_date >= (select coalesce(max(load_date),'1900-01-01') from {{ this }} )
+  WHERE created_at >= (SELECT COALESCE(MAX(created_at), '1900-01-01') FROM {{ this }})
+  OR updated_at >= (SELECT COALESCE(MAX(updated_at), '1900-01-01') FROM {{ this }})
 
 {% endif %}
+),
+
+ranked_customers AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY id ORDER BY created_at DESC) AS row_num
+    FROM transformed_customers
+    LEFT JOIN {{ countries }} countries
+    ON transformed_customers.country_code = countries.code
+)
+
+SELECT *
+FROM ranked_customers
+WHERE row_num=1
