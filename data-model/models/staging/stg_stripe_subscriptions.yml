@@ -1,19 +1,55 @@
 models:
-  - name: stg_stripe_subsctiptions
+  - name: stg_stripe_subscriptions
     description: |
-      This model extracts and transforms customer data from the ingested Stripe data which was ingested in Airbyte
+      This model stages subscription data from Stripe. Subscriptions allow you to charge a customer on a recurring basis.
     config:
-      tags: ["airbyte", "third_party", "stripe"]
+      tags: ["third_party", "stripe"]
     columns:
       - name: id
-        description: Customer name in uppercase.
+        description: Unique identifier for the subscription in Stripe.
         tests:
           - not_null
-      - name: user_id
-        description: The user_id of the customer
+          - unique
+      - name: customer_id
+        description: ID of the customer associated with the subscription.
         tests:
           - not_null:
               config:
                 severity: warn
-      - name: address_city
-        description: City from the customer's address.
+      - name: status
+        description: |
+          Status of the subscription. Possible values include:
+          - `incomplete`
+          - `incomplete_expired`
+          - `trialing`
+          - `active`
+          - `past_due`
+          - `canceled`
+          - `unpaid`
+          - `paused`
+      - name: start_date
+        description: The start date of the subscription.
+      - name: current_period_start
+        description: Start date of the current billing period.
+      - name: current_period_end
+        description: End date of the current billing period. A new invoice is created at the end of this period.
+      - name: ended_at
+        description: Date the subscription ended (if applicable).
+      - name: canceled_at
+        description: Date the subscription was canceled (if applicable).
+      - name: cancel_at_period_end
+        description: Indicates whether the subscription will or did cancel at the end of the current billing period.
+      - name: created_at
+        description: Timestamp when the subscription was created in Stripe.
+      - name: default_payment_method_id
+        description: ID of the default payment method for this subscription (if applicable).
+      - name: tax_percent
+        description: Tax percentage applied to the subscription (if applicable).
+      - name: trial_start
+        description: Start date of the trial period (if applicable).
+      - name: trial_end
+        description: End date of the trial period (if applicable).
+      - name: quantity
+        description: Number of units of the subscription.
+      - name: load_date
+        description: Date when Airbyte loaded the data into the landing zone.
