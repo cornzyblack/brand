@@ -8,6 +8,10 @@ Below is the high-level proposed Data architecture platform for Rebrandly.f
 
 ![diagram-export-20-01-2025-22_36_18.png](https://eraser.imgix.net/workspaces/vYdTkE0mwwIfr5728N7i/iNvzLUym61TQnmUEYWXk6qbQwBm2/sG3lXMIUj50d1hzb9w3Qc.png?ixlib=js-3.7.0 "diagram-export-20-01-2025-22_36_18.png")
 
+### Data Model
+
+<img src="../docs/data_model.png">
+
 ### Full Data Workflow: Stripe Data to Redshift
 
 1. **Data Ingestion (Stripe to S3):**

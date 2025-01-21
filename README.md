@@ -6,7 +6,9 @@ For a **detailed analysis on the Data architecture**, and why certain tools wher
 
 ## Data Model
 
-For more **detailed analysis about the Data model, KPI calculation and Data quality checks**, kindly see this []
+<img src="docs/data_model.png">
+
+For a more **detailed analysis about the Data model, KPI calculation and Data quality checks**, kindly see this [data-model/README.md](data-model/README.md)
 
 ## Installation & Setting up
 
@@ -188,6 +190,7 @@ Next, you will need to build the models using dbt-core by running the following:
 
 ```shell
 cd data-models
+dbt seed
 dbt run
 ```
 

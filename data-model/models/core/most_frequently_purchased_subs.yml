@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: most_frequently_purchased_subs
+    description: |
+      This model calculates the most frequently purchased subscriptions per country.
+    config:
+      tags: [fact, subscriptions, purchases, country]
+    columns:
+      - name: product_name
+        description: Name of the product associated with the subscription.
+        tests:
+          - not_null
+      - name: country_code
+        description: ISO 2-letter country code (e.g., US, GB).
+        tests:
+          - not_null
+      - name: purchase_count
+        description: The count of purchases for the subscription.
+        tests:
+          - not_null
+      - name: rank
+        description: Rank of the product based on purchase count within each country.
