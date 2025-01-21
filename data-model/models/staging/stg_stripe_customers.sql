@@ -43,8 +43,8 @@ ranked_customers AS (
 SELECT
   id,
   user_id,
-  first_name,
-  last_name,
+  UPPER(LEFT(first_name, 1)) || LOWER(SUBSTRING(first_name, 2)) AS first_name,
+  UPPER(LEFT(last_name, 1)) || LOWER(SUBSTRING(last_name, 2)) AS last_name,
   full_name,
   phone_number,
   address_city,

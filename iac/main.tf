@@ -101,6 +101,10 @@ resource "airbyte_connection" "stripe_s3_connection" {
         sync_mode = "incremental_append"
         name      = "subscriptions"
       },
+     {
+        sync_mode = "incremental_append"
+        name      = "plans"
+      },
       {
         sync_mode = "incremental_append"
         name      = "charges"

@@ -22,7 +22,7 @@ WITH transformed_subscription_items AS (
         plan['object']['interval'] as plan_interval,
         plan['object']['id'] as plan_id,
         plan['object']['amount'] as plan_amount,
-        plan['object']['product'] as plan_product,
+        plan['object']['product'] as product_id,
         plan['object']['interval_count'] as plan_interval_count,
         plan['object']['billing_scheme'] as plan_billing_scheme,
         DATE AS load_date
@@ -56,7 +56,7 @@ plan_active,
 plan_interval,
 plan_id,
 plan_amount,
-plan_product,
+product_id,
 plan_interval_count,
 plan_billing_scheme
 FROM ranked_subscription_items
