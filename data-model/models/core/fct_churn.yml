@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: fct_churn
+    description: |
+      This model calculates the churn count for subscriptions on a monthly basis.
+    config:
+      tags: [fact, churn]
+    columns:
+      - name: subscription_id
+        description: Unique identifier for the subscription.
+        tests:
+          - not_null
+          - unique
+      - name: status
+        description: Status of the subscription (e.g., active, paused, unpaid, canceled).
+      - name: created_at
+        description: Timestamp when the subscription was created.
+      - name: current_period_start
+        description: Timestamp when the current billing period started.
+      - name: current_period_end
+        description: Timestamp when the current billing period ended.
+      - name: ended_at
+        description: Timestamp when the subscription ended.
+      - name: canceled_at
+        description: Timestamp when the subscription was canceled.
+      - name: trial_start
+        description: Timestamp when the trial period started.
+      - name: trial_end
+        description: Timestamp when the trial period ended.
+      - name: is_churned
+        description: Indicates whether the subscription is churned.
+      - name: churn_month
+        description: The month for which the churn is calculated.
+        tests:
+          - not_null
+      - name: churn_count
+        description: The count of churned subscriptions for the month.

@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: fct_churn_country
+    description: |
+      This model calculates the monthly churn count and total MRR for churned subscriptions, grouped by country.
+    config:
+      tags: [fact, churn, country]
+    columns:
+      - name: country_code
+        description: ISO 2-letter country code (e.g., US, GB).
+        tests:
+          - not_null
+      - name: churn_month
+        description: The month for which the churn is calculated.
+        tests:
+          - not_null
+      - name: total_lost_revenue
+        description: Total monthly lost from churned subscriptions.
+      - name: churn_count
+        description: The count of churned subscriptions for the month.

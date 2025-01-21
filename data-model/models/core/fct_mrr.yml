@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: fct_mrr
+    description: |
+      This model calculates the monthly recurring revenue (MRR) for active subscriptions.
+    config:
+      tags: [fact, mrr]
+    columns:
+      - name: subscription_id
+        description: Unique identifier for the subscription.
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+        description: Name of the product associated with the subscription.
+      - name: mrr
+        description: Monthly recurring revenue (MRR) for the subscription.
+      - name: total_mrr
+        description: Total monthly recurring revenue (MRR) for the subscription.
+      - name: currency
+        description: ISO 3-letter currency code (e.g., USD, GBP).
+      - name: mrr_month
+        description: The month for which the MRR is calculated.
+        tests:
+          - not_null

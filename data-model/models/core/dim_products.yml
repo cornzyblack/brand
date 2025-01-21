@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: |
+      This model provides a dimension table for products, including details such as product name, status, description, price, and creation date.
+    config:
+      tags: [dimension, products]
+    columns:
+      - name: id
+        description: Unique identifier for the product.
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: Name of the product.
+        tests:
+          - not_null
+      - name: active
+        description: Indicates whether the product is active.
+      - name: description
+        description: Description of the product.
+      - name: is_deleted
+        description: Indicates whether the product is marked as deleted.
+      - name: default_price
+        description: Default price of the product.
+      - name: created_at
+        description: Timestamp when the product was created.
+        tests:
+          - not_null

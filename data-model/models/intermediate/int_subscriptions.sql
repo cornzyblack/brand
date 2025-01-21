@@ -11,6 +11,7 @@
 with subscriptions as (
     select
         sub.id as subscription_id,
+        sub.customer_id as customer_id,
         sub.status,
         sub.created_at,
         sub.current_period_start,
@@ -21,6 +22,7 @@ with subscriptions as (
         sub.trial_end,
         sub.amount_paid,
         sub.currency,
+        product_id,
         pdct.name as product_name,
         case
             when sub.status = 'active' then true
