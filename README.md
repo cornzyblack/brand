@@ -121,7 +121,7 @@ You'd need a Stripe API key and a Stripe account ID for a test account. Kindly f
 
 ---
 
-### Provisioning resources (Cloud + Airbyte)
+### <a name="terraform_provisioning">Provisioning resources (Cloud + Airbyte)</a>
 
 There is a file called [dev.tfvars](iac/dev.tfvars) found in the [iac/](iac/) directory.
 
@@ -208,7 +208,7 @@ dbt docs serve
 
 ## Issues
 
-- If you notice that Terraform is not working for you, double-check to make sure you are running the command from within the `iac` folder, refer to here
-- I get this error message `Runtime Error in model stg_stripe_customers (models/staging/stg_stripe_customers.sql)
+- If you notice that Terraform is not working for you, double-check to make sure you are running the command from within the `iac` folder, refer to [here](#terraform_provisioning)
+- If you are getting an error message that looks like this `Runtime Error in model stg_stripe_customers (models/staging/stg_stripe_customers.sql)
   HTTP Error: HTTP GET error on '/?encoding-type=url&list-type=2&prefix=stripe%2Fstripe_customers%2FDATE%3D' (HTTP 404)
 20:48:00` . This could mean that you have not synced data into your S3 bucket or that the bucket name for your S3 bucket is wrong. You can log into AWS, and check that you have a bucket created, or otherwise follow the steps [here](#s3_bucket_name) to see if your bucket name is set correctly. If it is set correctly, then it might be that your bucket is currently empty. You'd need to load data into it with Airbyte. You can do this by following the steps [here](#airbyte_sync)
