@@ -10,7 +10,7 @@ with transformed_customers AS (
     id,
     TRY_CAST(json_extract(metadata, '$.user_id') AS int) AS user_id,
     name as full_name,
-    string_split(name, ' ')[0] as first_name,
+    string_split(name, ' ')[1] as first_name,
     string_split(name, ' ')[-1] as last_name,
     phone AS phone_number,
     address['city'] AS address_city,
@@ -41,21 +41,21 @@ ranked_customers AS (
 )
 
 SELECT
-id,
-user_id,
-first_name,
-last_name,
-full_name,
-phone_number,
-address_city,
-address_line,
-address_state,
-address_postal_code,
-country_code,
-created_at,
-updated_at,
-load_date,
-is_deleted,
-currency_code
+  id,
+  user_id,
+  first_name,
+  last_name,
+  full_name,
+  phone_number,
+  address_city,
+  address_line,
+  address_state,
+  address_postal_code,
+  country_code,
+  created_at,
+  updated_at,
+  is_deleted,
+  currency_code,
+  load_date
 FROM ranked_customers
 WHERE row_num=1

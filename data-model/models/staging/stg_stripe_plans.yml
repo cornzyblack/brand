@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_stripe_plans
+    description: |
+      This model stages plan data from Stripe, extracted from data ingested by Airbyte.
+    config:
+      tags: [third_party, stripe]
+    columns:
+      - name: id
+        description: Unique identifier for the plan in Stripe.
+        tests:
+          - not_null
+          - unique
+      - name: interval
+        description: Billing interval for the plan (e.g., 'month', 'year').
+      - name: product_id
+        description: Unique identifier for the associated product.
+      - name: created_at
+        description: Timestamp when the plan was created in Stripe.
+        tests:
+          - not_null
+      - name: updated_at
+        description: Timestamp of the last update to the plan in Stripe.
+      - name: load_date
+        description: Date when Airbyte loaded the data into the landing zone.
+      - name: is_deleted
+        description: Indicates whether the plan is marked as deleted in Stripe.
+      - name: currency_code
+        description: ISO 3-letter currency code (e.g., USD, GBP).

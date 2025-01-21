@@ -3,7 +3,7 @@ models:
     description: |
       This model stages subscription data from Stripe. Subscriptions allow you to charge a customer on a recurring basis.
     config:
-      tags: ["third_party", "stripe"]
+      tags: [third_party, stripe]
     columns:
       - name: id
         description: Unique identifier for the subscription in Stripe.
@@ -51,5 +51,19 @@ models:
         description: The currency of the subscription.
       - name: quantity
         description: Number of units of the subscription.
+      - name: plan_active
+        description: Indicates whether the associated plan is active.
+      - name: plan_interval
+        description: Billing interval for the plan (e.g., 'month', 'year').
+      - name: plan_id
+        description: Unique identifier for the associated plan.
+      - name: plan_amount
+        description: Amount charged for the plan.
+      - name: plan_product
+        description: Product associated with the plan.
+      - name: plan_interval_count
+        description: Number of intervals for the billing period.
+      - name: plan_billing_scheme
+        description: Billing scheme for the plan (e.g., 'per_unit').
       - name: load_date
         description: Date when Airbyte loaded the data into the landing zone.

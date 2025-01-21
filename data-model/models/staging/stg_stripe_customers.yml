@@ -3,9 +3,9 @@ models:
     description: |
       This model stages customer data from Stripe, extracted from data ingested by Airbyte.
     config:
-      tags: ["third_party", "stripe"]
+      tags: [third_party, stripe]
     columns:
-      - name: customer_id
+      - name: id
         description: Unique identifier for the customer in Stripe.
         tests:
           - not_null

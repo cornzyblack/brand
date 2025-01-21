@@ -17,10 +17,19 @@ WITH transformed_subscriptions AS (
         to_timestamp(canceled_at) AS canceled_at,
         cancel_at_period_end,
         to_timestamp(created) AS created_at,
+        is_deleted AS is_deleted,
         tax_percent,
         trial_start,
         currency,
         trial_end,
+        COALESCE(plan['active'], False) as plan_active,
+        plan['interval'] as plan_interval,
+        plan['id'] as plan_id,
+        plan['amount'] as plan_amount,
+        plan['currency'] as plan_currency,
+        plan['product'] as plan_product,
+        plan['interval_count'] as plan_interval_count,
+        plan['billing_scheme'] as plan_billing_scheme,
         quantity,
         DATE AS load_date
     FROM read_parquet('s3://{{ env_var('AWS_BUCKET_NAME') }}/stripe/stripe_subscriptions/DATE=*/*.parquet',
@@ -53,6 +62,13 @@ SELECT
     trial_end,
     currency,
     quantity,
+    plan_active,
+    plan_interval,
+    plan_id,
+    plan_amount,
+    plan_product,
+    plan_interval_count,
+    plan_billing_scheme,
     load_date
 FROM ranked_subscriptions
 WHERE row_num = 1

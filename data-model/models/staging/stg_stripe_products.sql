@@ -9,7 +9,7 @@ with transformed_products AS (
   SELECT
     id,
     name,
-    active,
+    COALESCE(active, FALSE) as active,
     description,
     is_deleted,
     default_price,

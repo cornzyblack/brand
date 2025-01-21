@@ -3,7 +3,7 @@ models:
     description: |
       This model stages product data from Stripe, extracted from data ingested by Airbyte.
     config:
-      tags: ["third_party", "stripe"]
+      tags: [third_party, stripe]
     columns:
       - name: id
         description: Unique identifier for the product in Stripe.
